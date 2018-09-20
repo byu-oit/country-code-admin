@@ -1,17 +1,8 @@
 <template>
-    <!--<table>-->
-        <!--<tr>-->
-            <!--&lt;!&ndash;<th> {{ firstRow }}</th>&ndash;&gt;-->
-            <!--&lt;!&ndash;<th> {{ secondRow }}</th>&ndash;&gt;-->
-            <!--&lt;!&ndash;<th> {{ thirdRow }}</th>&ndash;&gt;-->
-        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-        <!--&lt;!&ndash;<tr>&ndash;&gt;-->
-            <!--&lt;!&ndash;<td v-for="item in entry"> {{ item }}</td>&ndash;&gt;-->
-        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-    <!--</table>-->
-        <v-card>
+
+          <v-card>
             <v-card-title>
-                Country Codes
+                <strong><h2>Country Codes</h2></strong>
                 <v-spacer></v-spacer>
                 <v-text-field
                         v-model="search"
@@ -23,16 +14,15 @@
             </v-card-title>
             <v-data-table
                     :headers="headers"
-                    :items="desserts"
+                    :items="countryCodes"
                     :search="search"
             >
                 <template slot="items" slot-scope="props">
-                    <td>{{ props.item.name }}</td>
-                    <td class="text-xs-right">{{ props.item.countryCode }}</td>
-                    <td class="text-xs-right">{{ props.item.description }}</td>
-                    <td class="text-xs-right">{{ props.item.longDescription }}</td>
-                    <td class="text-xs-right">{{ props.item.iso3Code }}</td>
-                    <td class="text-xs-right">{{ props.item.isoCode }}</td>
+                    <td><strong><h4>{{ props.item.country_code }}</h4></strong></td>
+                    <td class="text-xs-left">{{ props.item.description }}</td>
+                    <td class="text-xs-left">{{ props.item.long_description }}</td>
+                    <td class="text-xs-left">{{ props.item.iso3_code }}</td>
+                    <td class="text-xs-left">{{ props.item.iso_code }}</td>
                 </template>
                 <v-alert slot="no-results" :value="true" color="error" icon="warning">
                     Your search for "{{ search }}" found no results.
@@ -45,36 +35,42 @@
     export default {
       name: 'CountryCodeTable',
       data: function () {
-        // if () {const countryCode = 'USA'
-        // const description = 'United States'
-        // const longDescription = 'United States of America'
-        // const iso3Code = 'USA'
-        // const isoCode = 'US'}},
         return {
-          props: {
-            item: [
-              'countryCode',
-              'description',
-              'longDescription',
-              'iso3Code',
-              'isoCode'
+            search: '',
+            selected: [],
+            headers: [
+              {text: 'Country Code', sortable: false, align: 'center', value: 'country_code'},
+              {text: 'Description', sortable: false, align: 'left', value: 'description'},
+              {text: 'Long Description', sortable: false, align: 'left', value: 'long_description'},
+              {text: 'iso3 Code', sortable: false, align: 'left', value: 'iso3_code'},
+              {text: 'iso Code', sortable: false, align: 'left', value: 'iso_code'}
+            ],
+            countryCodes: [
+              {
+                country_code: 'USA',
+                description: 'United States',
+                long_description: 'United States of America',
+                iso3_code: 'USA',
+                iso_code: 'US'
+              },
+              {
+                country_code: 'CAN',
+                description: 'Canada',
+                long_description: 'Canada',
+                iso3_code: 'CAN',
+                iso_code: 'CA'
+              },
+              {
+                country_code: 'ARG',
+                description: 'Argentina',
+                long_description: 'The Republic of Argentina',
+                iso3_code: 'ARG',
+                iso_code: 'AR'
+              }
             ]
-          }
         }
       }
     }
-      // data: function () {
-      //   return {
-      //     firstRow: 'Country Code',
-      //     secondRow: 'Description',
-      //     thirdRow: 'Long Description',
-      //     entry: [
-      //       'ARG',
-      //       'Argentina',
-      //       'Argentina'
-      //     ]
-      //   }
-      // }
 </script>
 
 <style>

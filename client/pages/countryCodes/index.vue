@@ -3,6 +3,7 @@
 
         <CountryCodeList></CountryCodeList>
         <CountryCodeTable></CountryCodeTable>
+        <AddCountryCode></AddCountryCode>
     </section>
 
 
@@ -11,8 +12,10 @@
 <script>
     import CountryCodeList from "../../components/name"
     import CountryCodeTable from "../../components/table"
+    import AddCountryCode from '../../components/AddCountryCode'
     export default {
       components: {
+        AddCountryCode,
         CountryCodeList,
         CountryCodeTable
       }
