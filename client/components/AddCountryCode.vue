@@ -95,15 +95,15 @@
         headers: [
           {
             text: 'Country Code',
-            align: 'left',
+            align: 'center',
             sortable: false,
             value: 'country_code'
           },
-          {text: 'Description', value: 'description'},
-          {text: 'Long Description', value: 'long_description'},
-          {text: 'iso3 Code', value: 'iso3_code'},
-          {text: 'iso Code', value: 'iso_code'},
-          {text: 'Phone Prefix', value: 'phone_prefix', sortable: false}
+          {text: 'Description', align: 'right', value: 'description'},
+          {text: 'Long Description', align: 'right', value: 'long_description'},
+          {text: 'iso3 Code', align: 'right', value: 'iso3_code'},
+          {text: 'iso Code', align: 'right', value: 'iso_code'},
+          {text: 'Phone Prefix', align: 'right', value: 'phone_prefix', sortable: false}
         ],
         countryCodes: [],
         editedIndex: -1,
