@@ -81,13 +81,17 @@
                 <v-btn color="primary" @click="initialize">Reset</v-btn>
             </template>
         </v-data-table>
+        <div>{{ this.state }}</div>
     </div>
 </template>
 
 <script>
   // import VTextField from 'vuetify/src/components/VTextField/VTextField'
+  import axios from '../plugins/axios'
+  import Vuex from 'vuex'
   export default {
     name: 'AddCountryCode',
+    const: 'this.state',
     // components: {VTextField},
     data: function () {
       return {
@@ -125,6 +129,12 @@
         }
       }
     },
+    // mounted () {
+    //   name: 'API'
+    //   axios
+    //     .get('https://api.byu.edu/domains/identity/country_codes_v2/v2')
+    //     .then(response => this.info = response)
+
 
       computed: {
         formTitle () {
@@ -143,6 +153,12 @@
       },
 
       methods: {
+        // mounted () {
+        //   name: 'API'
+        //   axios
+        //     .get('https://api.byu.edu/domains/identity/country_codes_v2/v2')
+        //     .then(response => this.info = response)
+
         initialize () {
           this.countryCodes = [
             {
