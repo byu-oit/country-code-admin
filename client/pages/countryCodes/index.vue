@@ -18,6 +18,11 @@
         AddCountryCode,
         CountryCodeList,
         CountryCodeTable
+      },
+      data () {
+        return {
+          source: ''
+        }
       }
     }
 </script>

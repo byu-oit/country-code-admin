@@ -41,10 +41,21 @@ app.use('/api', api);
 app.use(render(wabs));
 
 // start server listening on port
-app.listen(config.port, config.host, err => {
-    if (err) {
-        console.error(err.stack);
-        process.exit(1);
-    }
-    console.log('Server listening on ' + config.host + ':' + config.port)
+const listener = app.listen(config.port, config.host, err => {
+  if (err) {
+    console.error(err.stack);
+    process.exit(1);
+  }
+  console.log('Server listening on ' + config.host + ':' + config.port)
 });
+
+function stop() {
+  listener.close();
+  process.exit(0);
+}
+
+process.on('exit', stop)      // app is closing
+process.on('SIGINT', stop)    // catches ctrl+c event
+process.on('SIGBREAK', stop)  // catches Windows ctrl+c event
+process.on('SIGUSR1', stop)   // catches "kill pid"
+process.on('SIGUSR2', stop)   // catches "kill pid"
