@@ -26,20 +26,7 @@
             <h1>
             {{ title }}
             </h1>
-        <!--</v-header>-->
-        <!--<ul>-->
-            <!--<li v-for="item in list"> {{ item }} </li>-->
-        <!--</ul>-->
-        <body>
-        <!--<layout align-center>-->
-            <!--<v-flex xs12 sm4 text-xs-center>-->
-                <div>
-                    <v-btn large color="primary">USA</v-btn>
-                    <!--<button @click="showList" class="btn btn-primary">Codes</button>-->
-                </div>
-            <!--</v-flex>-->
-        <!--</layout>-->
-        </body>
+
     </div>
 </template>
 
@@ -49,15 +36,7 @@
     data: function () {
       return {
         title: 'Country Codes',
-        list: [
-          'USA',
-          'CAN',
-          'ARG'
-        ]
       }
-    },
-    methods: {
-
     }
   }
     // methods: {
@@ -73,10 +52,11 @@
 
 <style scoped>
     h1 {
-        font-size: 2em;
+        font-size: 4em;
         text-align: center
     }
     div {
         background-color: #dbe1ec;
+        background-size: auto;
     }
 </style>

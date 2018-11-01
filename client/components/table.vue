@@ -14,7 +14,7 @@
             </v-card-title>
             <v-data-table
                     :headers="headers"
-                    :items="countryCodes"
+                    :items="countryCodeList"
                     :search="search"
             >
                 <template slot="items" slot-scope="props">
@@ -45,7 +45,7 @@
               {text: 'iso3 Code', sortable: false, align: 'left', value: 'iso3_code'},
               {text: 'iso Code', sortable: false, align: 'left', value: 'iso_code'}
             ],
-            countryCodes: [
+            countryCodeList: [
               {
                 country_code: 'USA',
                 description: 'United States',

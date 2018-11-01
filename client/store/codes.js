@@ -74,12 +74,6 @@ export const mutations = {
 
 export const actions = {
 
-  nuxtServerInit: ({ commit }, { req }) => {
-    const wabs = req.wabs || {};
-    commit('wabs/authUpdate', wabs.auth);
-    commit('wabs/userUpdate', wabs.user);
-  },
-
   fetchCountryCodes: async (context) => {
     const request = {
       url: 'https://api.byu.edu/domains/identity/country_codes_v2/v2'
@@ -92,12 +86,12 @@ export const actions = {
       })
     })
   },
-  getCountryCodes (context) {
-    console.log('make wso2request to get list of Country Codes')
-    this.app.$WSO2Request(this.app.$byu, '/domains/identity/country_codes_v2/v2').then(response => {
-      context.commit('setCountryCode', response.data)
-      return true
-    }).catch(err => {
-    })
+
+  createCountryCode: async (context) => {
+    const request = {
+      url: 'https://api.byu.edu/domains/identity/country_codes_v2/v2'
+    }
+    return new Promise
   }
+
 }

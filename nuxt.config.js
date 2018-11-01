@@ -53,7 +53,9 @@ const config = {
     plugins: [
         { src: '~/plugins/byu', ssr: true },
         { src: '~/plugins/vuetify', ssr: true },
-        { src: '~/plugins/wabs', ssr: false }
+        { src: '~/plugins/wabs', ssr: false },
+        // { src: '~/plugins/WSO2Plugin', ssr: true },
+        // { src: '~/plugins/WSO2Request', ssr: true }
     ],
 
     // nuxt build configuration
@@ -62,6 +64,10 @@ const config = {
         // extend webpack configuration
         extend (config, { isDev, isClient, isServer }) {
             config.devtool = isDev ? 'eval-source-map' : 'source-map'
+            config.node = {
+                fs: 'empty',
+                child_process: 'empty'
+            }
         },
 
         vendor: [
