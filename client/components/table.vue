@@ -14,7 +14,7 @@
             </v-card-title>
             <v-data-table
                     :headers="headers"
-                    :items="countryCodeList"
+                    :items="codeList"
                     :search="search"
             >
                 <template slot="items" slot-scope="props">
@@ -32,6 +32,8 @@
 </template>
 
 <script>
+
+    // import { mapGetters } from '../vuex'
     export default {
       name: 'CountryCodeTable',
       data: function () {
@@ -45,28 +47,35 @@
               {text: 'iso3 Code', sortable: false, align: 'left', value: 'iso3_code'},
               {text: 'iso Code', sortable: false, align: 'left', value: 'iso_code'}
             ],
-            countryCodeList: [
+            codeList: [
               {
-                country_code: 'USA',
-                description: 'United States',
-                long_description: 'United States of America',
-                iso3_code: 'USA',
-                iso_code: 'US'
-              },
-              {
-                country_code: 'CAN',
-                description: 'Canada',
-                long_description: 'Canada',
-                iso3_code: 'CAN',
-                iso_code: 'CA'
-              },
-              {
-                country_code: 'ARG',
-                description: 'Argentina',
-                long_description: 'The Republic of Argentina',
-                iso3_code: 'ARG',
-                iso_code: 'AR'
+                country_code: this.$store.getters.country_code,
+                description: this.$store.getters.description,
+                long_description: this.$store.getters.long_description,
+                iso3_code: this.$store.getters.iso3_code,
+                iso_code: this.$store.getters.iso_code
               }
+              // {
+              //   country_code: 'USA',
+              //   description: 'United States',
+              //   long_description: 'United States of America',
+              //   iso3_code: 'USA',
+              //   iso_code: 'US'
+              // },
+              // {
+              //   country_code: 'CAN',
+              //   description: 'Canada',
+              //   long_description: 'Canada',
+              //   iso3_code: 'CAN',
+              //   iso_code: 'CA'
+              // },
+              // {
+              //   country_code: 'ARG',
+              //   description: 'Argentina',
+              //   long_description: 'The Republic of Argentina',
+              //   iso3_code: 'ARG',
+              //   iso_code: 'AR'
+              // }
             ]
         }
       }

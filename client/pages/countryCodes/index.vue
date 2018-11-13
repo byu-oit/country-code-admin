@@ -1,7 +1,7 @@
 <template>
     <section class="container">
 
-        <CountryCodeList></CountryCodeList>
+        <CountryCodeTitle></CountryCodeTitle>
         <CountryCodeTable></CountryCodeTable>
         <AddCountryCode></AddCountryCode>
     </section>
@@ -10,20 +10,21 @@
 </template>
 
 <script>
-    import CountryCodeList from "../../components/name"
+    import CountryCodeTitle from "../../components/name"
     import CountryCodeTable from "../../components/table"
     import AddCountryCode from '../../components/AddCountryCode'
+
     export default {
       components: {
+        CountryCodeTitle,
         AddCountryCode,
-        CountryCodeList,
         CountryCodeTable
       },
-      data () {
-        return {
-          source: ''
-        }
-      }
+      // data () {
+      //   return {
+      //     source: ''
+      //  }
+      // }
     }
 </script>
 

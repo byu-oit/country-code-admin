@@ -36,9 +36,6 @@
                                 <v-flex xs12 sm6 md4>
                                     <v-text-field v-model="editedItem.phone_prefix" label="Phone Prefix"></v-text-field>
                                 </v-flex>
-                                <v-flex xs12 sm6 md4>
-                                    <v-text-field v-model="editedItem.valid"></v-text-field>
-                                </v-flex>
                             </v-layout>
                         </v-container>
                     </v-card-text>
@@ -81,25 +78,16 @@
                 </td>
             </template>
             <template slot="no-data">
-                <v-btn color="primary" @click="initialize()">Reset</v-btn>
+                <v-btn color="primary" @click="initialize">Reset</v-btn>
             </template>
         </v-data-table>
-        <!--<div>{{ this.state }}</div>-->
     </div>
 </template>
 
 <script>
-
-  import axios from '../plugins/axios'
-  import { mapGetters } from 'vuex'
-
+  // import VTextField from 'vuetify/src/components/VTextField/VTextField'
   export default {
     name: 'AddCountryCode',
-    const: this.codes,
-
-    async fetch({store}) {
-      store.dispatch('setCountryCode')
-    },
     // components: {VTextField},
     data: function () {
       return {
@@ -109,8 +97,7 @@
             text: 'Country Code',
             align: 'center',
             sortable: false,
-            value: this.setCountryCode
-            // value: 'country_code'
+            value: 'country_code'
           },
           {text: 'Description', align: 'right', value: 'description'},
           {text: 'Long Description', align: 'right', value: 'long_description'},
@@ -138,161 +125,132 @@
         }
       }
     },
-    // mounted () {
-    //   name: 'API'
-    //   axios
-    //     .get('https://api.byu.edu/domains/identity/country_codes_v2/v2')
-    //     .then(response => this.info = response)
-    // },
-
-      computed: {
-        formTitle () {
-          return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
-        }
-      },
-
-      watch: {
-        dialog (val) {
-          val || this.close()
-        }
-      },
-
-      created () {
-      this.initialize
-      //   this.mounted()
-      },
-
-    // created: function () {
-    //     this.$http.get('https://api.byu.edu/domains/identity/country_codes_v2/v2')
-    //     .then(response => {
-    //       this.countryCodes = reponse.data.countryCodes
-    //     })
-    // },
-
-      // methods: {
-      //   mounted () {
-      //     name: 'API'
-      //     axios
-      //       .get('https://api.byu.edu/domains/identity/country_codes_v2/v2')
-      //       .then(response => this.data = response)
-      //   },
-
-        initialize () {
-          this.countryCodes = [
-            {
-              country_code: 'CHI',
-              description: 'Chile',
-              long_description: 'The Republic of Chile',
-              iso3_code: 'CHI',
-              iso_code: 'CL',
-              phone_prefix: '56'
-            },
-            {
-              country_code: 'USA',
-              description: 'United States',
-              long_description: 'United States of America',
-              iso3_code: 'USA',
-              iso_code: 'US',
-              phone_prefix: '001'
-            },
-            {
-              country_code: 'CAN',
-              description: 'Canada',
-              long_description: 'Canada',
-              iso3_code: 'CAN',
-              iso_code: 'CA',
-              phone_prefix: '121'
-            },
-            {
-              country_code: 'BRA',
-              description: 'Brazil',
-              long_description: 'Brazil',
-              iso3_code: 'BRA',
-              iso_code: 'BR',
-              phone_prefix: '55'
-            },
-            {
-              country_code: 'ARG',
-              description: 'Argentina',
-              long_description: 'The Republic of Argentina',
-              iso3_code: 'ARG',
-              iso_code: 'AR',
-              phone_prefix: '54'
-            },
-            {
-              country_code: 'ALB',
-              description: 'Albania',
-              long_description: 'Albania',
-              iso3_code: 'ALB',
-              iso_code: 'AL',
-              phone_prefix: '355'
-            },
-            {
-              country_code: 'CZE',
-              description: 'Czech Republic',
-              long_description: 'Czech Republic',
-              iso3_code: 'CZE',
-              iso_code: 'CZ',
-              phone_prefix: '420'
-            },
-            {
-              country_code: 'POL',
-              description: 'Poland',
-              long_description: 'Poland',
-              iso3_code: 'POL',
-              iso_code: 'PL',
-              phone_prefix: '48'
-            },
-            {
-              country_code: 'GER',
-              description: 'Germany',
-              long_description: 'Germany',
-              iso3_code: 'GER',
-              iso_code: 'DE',
-              phone_prefix: '49'
-            },
-            {
-              country_code: 'AUA',
-              description: 'Austria',
-              long_description: 'Austria',
-              iso3_code: 'AUA',
-              iso_code: 'AT',
-              phone_prefix: '43'
-            }
-          ]
-        },
-
-        editItem (item) {
-          this.editedIndex = this.countryCodes.indexOf(item)
-          this.editedItem = Object.assign({}, item)
-          this.dialog = true
-        },
-
-        deleteItem (item) {
-          const index = this.countryCodes.indexOf(item)
-          confirm('Are you sure you want to delete this item?') && this.country_code().splice(index, 1)
-        },
-
-        close () {
-          this.dialog = false
-          setTimeout(() => {
-            this.editedItem = Object.assign({}, this.defaultItem)
-            this.editedIndex = -1
-          }, 300)
-        },
-
-        save () {
-          if (this.editedIndex > -1) {
-            Object.assign(this.countryCodes[this.editedIndex], this.editedItem)
-          } else {
-            this.countryCodes.push(this.editedItem)
+    computed: {
+      formTitle () {
+        return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+      }
+    },
+    watch: {
+      dialog (val) {
+        val || this.close()
+      }
+    },
+    created () {
+      this.initialize()
+    },
+    methods: {
+      initialize () {
+        this.countryCodes = [
+          {
+            country_code: 'CHI',
+            description: 'Chile',
+            long_description: 'The Republic of Chile',
+            iso3_code: 'CHI',
+            iso_code: 'CL',
+            phone_prefix: '56'
+          },
+          {
+            country_code: 'USA',
+            description: 'United States',
+            long_description: 'United States of America',
+            iso3_code: 'USA',
+            iso_code: 'US',
+            phone_prefix: '001'
+          },
+          {
+            country_code: 'CAN',
+            description: 'Canada',
+            long_description: 'Canada',
+            iso3_code: 'CAN',
+            iso_code: 'CA',
+            phone_prefix: '121'
+          },
+          {
+            country_code: 'BRA',
+            description: 'Brazil',
+            long_description: 'Brazil',
+            iso3_code: 'BRA',
+            iso_code: 'BR',
+            phone_prefix: '55'
+          },
+          {
+            country_code: 'ARG',
+            description: 'Argentina',
+            long_description: 'The Republic of Argentina',
+            iso3_code: 'ARG',
+            iso_code: 'AR',
+            phone_prefix: '54'
+          },
+          {
+            country_code: 'ALB',
+            description: 'Albania',
+            long_description: 'Albania',
+            iso3_code: 'ALB',
+            iso_code: 'AL',
+            phone_prefix: '355'
+          },
+          {
+            country_code: 'CZE',
+            description: 'Czech Republic',
+            long_description: 'Czech Republic',
+            iso3_code: 'CZE',
+            iso_code: 'CZ',
+            phone_prefix: '420'
+          },
+          {
+            country_code: 'POL',
+            description: 'Poland',
+            long_description: 'Poland',
+            iso3_code: 'POL',
+            iso_code: 'PL',
+            phone_prefix: '48'
+          },
+          {
+            country_code: 'GER',
+            description: 'Germany',
+            long_description: 'Germany',
+            iso3_code: 'GER',
+            iso_code: 'DE',
+            phone_prefix: '49'
+          },
+          {
+            country_code: 'AUA',
+            description: 'Austria',
+            long_description: 'Austria',
+            iso3_code: 'AUA',
+            iso_code: 'AT',
+            phone_prefix: '43'
           }
-          this.close()
+        ]
+      },
+      editItem (item) {
+        this.editedIndex = this.countryCodes.indexOf(item)
+        this.editedItem = Object.assign({}, item)
+        this.dialog = true
+      },
+      deleteItem (item) {
+        const index = this.countryCodes.indexOf(item)
+        confirm('Are you sure you want to delete this item?') && this.countryCodes.splice(index, 1)
+      },
+      close () {
+        this.dialog = false
+        setTimeout(() => {
+          this.editedItem = Object.assign({}, this.defaultItem)
+          this.editedIndex = -1
+        }, 300)
+      },
+      save () {
+        if (this.editedIndex > -1) {
+          Object.assign(this.countryCodes[this.editedIndex], this.editedItem)
+        } else {
+          this.countryCodes.push(this.editedItem)
         }
+        this.close()
+      }
     }
-
+  }
 </script>
 
 <style scoped>
-
 </style>
+
