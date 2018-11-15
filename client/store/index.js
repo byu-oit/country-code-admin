@@ -19,7 +19,7 @@
 // export state as a function
 export const state = () => ({
     name: 'Country Codes',
-    countryCodes: {
+    countryCodes: [{
         country_code: '',
         country: '',
         description: '',
@@ -32,7 +32,7 @@ export const state = () => ({
         valid_for_citizenship: '',
         valid_for_home_country: '',
         continent_code: ''
-    }
+    }]
 
 });
 
@@ -112,6 +112,19 @@ export const mutations = {
 
 // export actions object
 export const actions = {
+
+    fetchCountryCodes: async (context) =>{
+        const request = {
+            url: "https://api.byu.edu:443/domains/identity/country_codes_v2/v2/"
+        }
+        return new Promise ((resolve, reject) => {
+            window.byu.auth.request(request, (body, status) => {
+                const values = JSON.parse(body).values
+                console.log(values)
+                resolve(true)
+            })
+        })
+    },
 
     // server side only execution for pre-populating the Vuex store
     nuxtServerInit: ({ commit }, { req }) => {

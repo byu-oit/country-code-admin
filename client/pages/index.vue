@@ -3,6 +3,7 @@
 
         <!--<CountryCodeTitle></CountryCodeTitle>-->
         <!--<CountryCodeTable></CountryCodeTable>-->
+        <button @click="fetchCountryCodes">API Call</button>
         <AddCountryCode></AddCountryCode>
 
     </section>
@@ -13,6 +14,7 @@
     import CountryCodeTitle from "../components/name"
     import CountryCodeTable from "../components/table"
     import AddCountryCode from '../components/AddCountryCode'
+    import { mapActions } from 'vuex'
 
     export default {
         components: {
@@ -20,6 +22,11 @@
             AddCountryCode,
             CountryCodeTable
         },
+        methods: {
+        ...mapActions ([
+          'fetchCountryCodes'
+        ])
+      }
         // data () {
         //   return {
         //     source: ''
