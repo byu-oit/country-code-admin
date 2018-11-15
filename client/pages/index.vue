@@ -1,37 +1,36 @@
-<!--<script src = "https://unpkg.com/vue"></script>-->
-
 <template>
-    <section>
-        <h1>Home Page</h1>
-        <p v-if="$byu.user">You're logged in</p>
-        <p v-else>Not logged in</p>
+    <section class="container">
 
-        <h2>Vuetify</h2>
-        <p>This starter also has Vuetify set up with some style modifications to bring it into compliance with the BYU style guide.</p>
-        <div>
-            <v-btn color="primary" @click="dialog=true">Primary</v-btn>
-            <v-btn color="secondary">Secondary</v-btn>
-            <v-btn color="accent">Accent</v-btn>
-            <v-btn color="success">Success</v-btn>
-            <v-btn color="error">Error</v-btn>
-            <v-btn color="warning">Warning</v-btn>
-            <v-btn color="info">Info</v-btn>
-        </div>
+        <!--<CountryCodeTitle></CountryCodeTitle>-->
+        <CountryCodeTable></CountryCodeTable>
+        <AddCountryCode></AddCountryCode>
 
-        <v-alert :value="true" type="success">Success</v-alert>
-        <v-alert :value="true" type="info">Info</v-alert>
-        <v-alert :value="true" type="warning">Warning</v-alert>
-        <v-alert :value="true" type="error">Error</v-alert>
     </section>
+
 </template>
 
 <script>
-    src = "https://unpkg.com/vue";
-    export default {
+    import CountryCodeTitle from "../components/name"
+    import CountryCodeTable from "../components/table"
+    import AddCountryCode from '../components/AddCountryCode'
 
+    export default {
+        components: {
+            CountryCodeTitle,
+            AddCountryCode,
+            CountryCodeTable
+        },
+        // data () {
+        //   return {
+        //     source: ''
+        //  }
+        // }
     }
 </script>
 
-<style lang="stylus" scoped>
-
+<style>
+    section {
+        text-align: center;
+    :v-color="primary";
+    }
 </style>

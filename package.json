@@ -1,7 +1,7 @@
 {
-  "name": "wabs-demo",
+  "name": "country-code-admin",
   "version": "0.0.1",
-  "description": "BYU's Web Application Bootstrap Service with Nuxt",
+  "description": "Country Code Editor",
   "private": true,
   "scripts": {
     "build": "nuxt build",
@@ -15,7 +15,7 @@
     "wabs",
     "byu"
   ],
-  "author": "James Speirs <james.speirs@gmail.com>",
+  "author": "",
   "license": "Apache-2.0",
   "dependencies": {
     "axios": "^0.18.0",

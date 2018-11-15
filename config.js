@@ -33,33 +33,30 @@ const config = {
 
         // default site navigation links
         navigationLinks: [
-            { href: '/', title: 'Home' },
-            { href: '/Contact', title: 'Contact' },
-            { href: '/Names', title: 'Names' },
-            { href: '/Identifiers', title: 'Identifiers' },
-            { href: '/Personal', title: 'Personal' },
-            { href: 'http://www.google.com', title: 'External' }
+            //{ href: '/', title: 'Home' },
         ],
 
         // default site title (in title bar)
-        pageTitle: { pre: '', main: 'Personal Information', post: '' },
+        pageTitle: { pre: '', main: 'Country Codes', post: '' },
 
         // how many milliseconds to wait before performing an automatic search - set to zero (0) to disable
         searchDebounce: 350,
 
         // default search functionality - set to null to disable
-        searchHandler: function(value, isAutoSearch) {
-            console.log('Searched for "' + value + '"' + (isAutoSearch ? ' using auto search' : ''))
-        },
+        searchHandler: null,
+        // function(value, isAutoSearch) {
+        //     console.log('Searched for "' + value + '"' + (isAutoSearch ? ' using auto search' : ''))
+        // },
 
         // default browser page title (modification requires rebuild)
-        title: 'BYU | Personal Information'
+        title: 'BYU | Country Codes'
     },
 
     // the WABS configuration: https://www.npmjs.com/package/byu-wabs#create-a-wabs-configuration
     wabs: {
         appName: pkg.name,
-        configFile: "C:\\Users\\challs\\Documents\\Secrets\\country-code-admin.json"
+        //configFile: "C:\\Users\\challs\\Documents\\Secrets\\country-code-admin.json" // Carlie Config File
+        //configFile: "C:/Users/tellers/Documents/node/countryconfig.json" // Chantel Config File
     }
 };
 
