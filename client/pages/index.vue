@@ -23,15 +23,13 @@
             CountryCodeTable
         },
         methods: {
-        ...mapActions ([
-          'fetchCountryCodes'
-        ])
+          ...mapActions([
+            'fetchCountryCodes'
+          ])
+        },
+      beforeMount() {
+          this.fetchCountryCodes()
       }
-        // data () {
-        //   return {
-        //     source: ''
-        //  }
-        // }
     }
 </script>
 
