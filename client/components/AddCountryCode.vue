@@ -1,12 +1,12 @@
 <template>
     <div>
         <v-toolbar flat color="white">
-            <v-toolbar-title>Country Codes</v-toolbar-title>
-            <v-divider
-                    class="mx-2"
-                    inset
-                    vertical
-            ></v-divider>
+            <v-toolbar-title> {{ getName }} </v-toolbar-title>
+            <!--<v-divider-->
+                    <!--class="mx-2"-->
+                    <!--inset-->
+                    <!--vertical-->
+            <!--&gt;</v-divider>-->
             <v-spacer></v-spacer>
             <v-dialog v-model="dialog" max-width="500px">
                 <v-btn slot="activator" color="primary" dark class="mb-2">New Country Code</v-btn>
@@ -86,8 +86,11 @@
 
 <script>
   // import VTextField from 'vuetify/src/components/VTextField/VTextField'
+
+  import {mapGetters} from 'vuex'
   export default {
     name: 'AddCountryCode',
+
     // components: {VTextField},
     data: function () {
       return {
@@ -126,6 +129,9 @@
       }
     },
     computed: {
+      ...mapGetters ([
+        'getName'
+      ]),
       formTitle () {
         return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
       }
