@@ -22,13 +22,25 @@
                                     <v-text-field v-model="editedItem.country_code" label="Country Code"></v-text-field>
                                 </v-flex>
                                 <v-flex xs12 sm6 md4>
-                                    <v-text-field v-model="editedItem.description" label="Description"></v-text-field>
+                                    <v-text-field v-model="editedItem.country" label="Country"></v-text-field>
                                 </v-flex>
                                 <v-flex xs12 sm6 md4>
-                                    <v-text-field v-model="editedItem.long_description" label="Long Description"></v-text-field>
+                                    <v-text-field v-model="editedItem.continent_code" label="Continent Code"></v-text-field>
                                 </v-flex>
                                 <v-flex xs12 sm6 md4>
-                                    <v-text-field v-model="editedItem.iso3_code" label="ISO3 code"></v-text-field>
+                                    <v-text-field v-model="editedItem.valid_for_address" label="Valid for Address"></v-text-field>
+                                </v-flex>
+                                <v-flex xs12 sm6 md4>
+                                    <v-text-field v-model="editedItem.valid_for_home_country" label="Valid for Home Country"></v-text-field>
+                                </v-flex>
+                                <v-flex xs12 sm6 md4>
+                                    <v-text-field v-model="editedItem.valid_for_birth_country" label="Valid for Birth Country"></v-text-field>
+                                </v-flex>
+                                <v-flex xs12 sm6 md4>
+                                    <v-text-field v-model="editedItem.valid_for_citizenship" label="Valid for Citizenship"></v-text-field>
+                                </v-flex>
+                                <v-flex xs12 sm6 md4>
+                                    <v-text-field v-model="editedItem.iso_code_3" label="ISO3 code"></v-text-field>
                                 </v-flex>
                                 <v-flex xs12 sm6 md4>
                                     <v-text-field v-model="editedItem.iso_code" label="ISO code"></v-text-field>
@@ -57,7 +69,11 @@
             <template slot="items" slot-scope="props">
                 <td>{{ props.item.country_code }}</td>
                 <td class="text-xs-right">{{ props.item.country }}</td>
+                <td class="text-xs-right">{{ props.item.continent_code}}</td>
                 <td class="text-xs-right">{{ props.item.valid_for_address }}</td>
+                <td class="text-xs-right">{{ props.item.valid_for_home_country}}</td>
+                <td class="text-xs-right">{{ props.item.valid_for_birth_country}}</td>
+                <td class="text-xs-right">{{ props.item.valid_for_citizenship}}</td>
                 <td class="text-xs-right">{{ props.item.iso_code_3 }}</td>
                 <td class="text-xs-right">{{ props.item.iso_code }}</td>
                 <td class="text-xs-right">{{ props.item.country_phone_prefix}}</td>
@@ -88,9 +104,10 @@
   // import VTextField from 'vuetify/src/components/VTextField/VTextField'
 
   import {mapGetters} from 'vuex'
+  // import VTextField from 'vuetify/lib/components/VTextField/VTextField'
   export default {
     name: 'AddCountryCode',
-
+    // components: {VTextField},
     // components: {VTextField},
     data: function () {
       return {
@@ -102,8 +119,12 @@
             sortable: false,
             value: 'country_code'
           },
-          {text: 'Description', align: 'right', value: 'description'},
+          {text: 'Country', align: 'right', value: 'description'},
+          {text: 'Continent Code', align: 'right', value: 'continent_code'},
           {text: 'Valid for Address', align: 'right', value: 'long_description'},
+          {text: 'Valid for Home Country', align: 'right', value: 'valid_for_home_country'},
+          {text: 'Valid for Birth Country', align: 'right', value: 'valid_for_birth_country'},
+          {text: 'Valid for Citizenship', align: 'right', value: 'valid_for_citizenship'},
           {text: 'iso3 Code', align: 'right', value: 'iso3_code'},
           {text: 'iso Code', align: 'right', value: 'iso_code'},
           {text: 'Phone Prefix', align: 'right', value: 'phone_prefix', sortable: false}
@@ -112,8 +133,12 @@
         editedIndex: -1,
         editedItem: {
           country_code: '',
-          description: '',
-          long_description: '',
+          country: '',
+          continent_code: '',
+          valid_for_address: '',
+          valid_for_home_country: '',
+          valid_for_birth_country: '',
+          valid_for_citizenship: '',
           iso3_code: '',
           iso_code: '',
           phone_prefix: ''
@@ -142,94 +167,9 @@
         val || this.close()
       }
     },
-    // created () {
-    //   this.initialize()
-    // },
+
     methods: {
-      // initialize () {
-      //   this.countryCodes = [
-      //     {
-      //       country_code: 'CHI',
-      //       description: 'Chile',
-      //       long_description: 'The Republic of Chile',
-      //       iso3_code: 'CHI',
-      //       iso_code: 'CL',
-      //       phone_prefix: '56'
-      //     },
-      //     {
-      //       country_code: 'USA',
-      //       description: 'United States',
-      //       long_description: 'United States of America',
-      //       iso3_code: 'USA',
-      //       iso_code: 'US',
-      //       phone_prefix: '001'
-      //     },
-      //     {
-      //       country_code: 'CAN',
-      //       description: 'Canada',
-      //       long_description: 'Canada',
-      //       iso3_code: 'CAN',
-      //       iso_code: 'CA',
-      //       phone_prefix: '121'
-      //     },
-      //     {
-      //       country_code: 'BRA',
-      //       description: 'Brazil',
-      //       long_description: 'Brazil',
-      //       iso3_code: 'BRA',
-      //       iso_code: 'BR',
-      //       phone_prefix: '55'
-      //     },
-      //     {
-      //       country_code: 'ARG',
-      //       description: 'Argentina',
-      //       long_description: 'The Republic of Argentina',
-      //       iso3_code: 'ARG',
-      //       iso_code: 'AR',
-      //       phone_prefix: '54'
-      //     },
-      //     {
-      //       country_code: 'ALB',
-      //       description: 'Albania',
-      //       long_description: 'Albania',
-      //       iso3_code: 'ALB',
-      //       iso_code: 'AL',
-      //       phone_prefix: '355'
-      //     },
-      //     {
-      //       country_code: 'CZE',
-      //       description: 'Czech Republic',
-      //       long_description: 'Czech Republic',
-      //       iso3_code: 'CZE',
-      //       iso_code: 'CZ',
-      //       phone_prefix: '420'
-      //     },
-      //     {
-      //       country_code: 'POL',
-      //       description: 'Poland',
-      //       long_description: 'Poland',
-      //       iso3_code: 'POL',
-      //       iso_code: 'PL',
-      //       phone_prefix: '48'
-      //     },
-      //     {
-      //       country_code: 'GER',
-      //       description: 'Germany',
-      //       long_description: 'Germany',
-      //       iso3_code: 'GER',
-      //       iso_code: 'DE',
-      //       phone_prefix: '49'
-      //     },
-      //     {
-      //       country_code: 'AUA',
-      //       description: 'Austria',
-      //       long_description: 'Austria',
-      //       iso3_code: 'AUA',
-      //       iso_code: 'AT',
-      //       phone_prefix: '43'
-      //     }
-      //   ]
-      // },
+
       editItem (item) {
         this.editedIndex = this.countryCodes.indexOf(item)
         this.editedItem = Object.assign({}, item)

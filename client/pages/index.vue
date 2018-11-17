@@ -3,7 +3,7 @@
 
         <!--<CountryCodeTitle></CountryCodeTitle>-->
         <!--<CountryCodeTable></CountryCodeTable>-->
-        <button @click="fetchCountryCodes">API Call</button>
+        <!--<button @click="fetchCountryCodes">API Call</button>-->
         <AddCountryCode></AddCountryCode>
 
     </section>
@@ -27,7 +27,7 @@
             'fetchCountryCodes'
           ])
         },
-      beforeMount() {
+        beforeMount() {
           this.fetchCountryCodes()
       }
     }

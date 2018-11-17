@@ -22,16 +22,14 @@ export const state = () => ({
     countryCodes: [{
         country_code: '',
         country: '',
-        description: '',
-        long_description: '',
-        iso_code: '',
-        iso_code_3: '',
-        country_phone_prefix: '',
+        continent_code: '',
         valid_for_address: '',
+        valid_for_home_country: '',
         valid_for_birth_country: '',
         valid_for_citizenship: '',
-        valid_for_home_country: '',
-        continent_code: ''
+        iso_code_3: '',
+        iso_code: '',
+        country_phone_prefix: '',
     }]
 
 });
