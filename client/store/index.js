@@ -30,8 +30,8 @@ export const state = () => ({
         iso_code_3: '',
         iso_code: '',
         country_phone_prefix: '',
-    }]
-
+    }],
+    authorized: false
 });
 
 export const getters = {
@@ -40,12 +40,18 @@ export const getters = {
     },
     getCountryCodes: state => {
         return state.countryCodes
+    },
+    getAuthorized: state => {
+        return state.authorized
     }
 };
 // export mutations object
 export const mutations = {
     setCountryCodes: (state, values) => {
         state.countryCodes = values
+    },
+    setAuthorized: (state, bool) => {
+        state.authorized = bool
     }
 };
 
@@ -58,10 +64,18 @@ export const actions = {
         }
         return new Promise ((resolve, reject) => {
             window.byu.auth.request(request, (body, status) => {
-                const values = JSON.parse(body).values
-                context.commit('setCountryCodes', values)
-                console.log(values)
-                resolve(true)
+                if (status >= 400) {
+                    console.error(`${status} - ${body}`)
+                    context.commit("setAuthorized", false)
+                    resolve(false)
+                }
+                else {
+                    const values = JSON.parse(body).values
+                    context.commit('setCountryCodes', values)
+                    context.commit('setAuthorized', true)
+                    console.log(values)
+                    resolve(true)
+                }
             })
         })
     },

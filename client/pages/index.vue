@@ -1,12 +1,15 @@
 <template>
-    <section class="container">
-
+    <div>
+        <div v-if="getAuthorized === false">
+            <h2> Error retrieving codes.  Please make sure you are logged in. </h2>
+        </div>
+        <div  v-show="getAuthorized">
         <!--<CountryCodeTitle></CountryCodeTitle>-->
         <!--<CountryCodeTable></CountryCodeTable>-->
         <!--<button @click="fetchCountryCodes">API Call</button>-->
         <AddCountryCode></AddCountryCode>
-
-    </section>
+        </div>
+    </div>
 
 </template>
 
@@ -14,13 +17,18 @@
     import CountryCodeTitle from "../components/name"
     import CountryCodeTable from "../components/table"
     import AddCountryCode from '../components/AddCountryCode'
-    import { mapActions } from 'vuex'
+    import { mapActions, mapGetters } from 'vuex'
 
     export default {
         components: {
             CountryCodeTitle,
             AddCountryCode,
             CountryCodeTable
+        },
+        computed: {
+            ...mapGetters([
+                'getAuthorized'
+            ])
         },
         methods: {
           ...mapActions([

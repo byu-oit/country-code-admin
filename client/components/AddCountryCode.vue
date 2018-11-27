@@ -60,14 +60,18 @@
                 </v-card>
             </v-dialog>
         </v-toolbar>
+
+        <v-flex md30 style="overflow: auto">
         <v-data-table
                 :headers="headers"
                 :items="getCountryCodes"
                 hide-actions
                 class="elevation-1"
+                must-sort
         >
+
             <template slot="items" slot-scope="props">
-                <td>{{ props.item.country_code }}</td>
+                <td class="text-xs-right">{{ props.item.country_code }}</td>
                 <td class="text-xs-right">{{ props.item.country }}</td>
                 <td class="text-xs-right">{{ props.item.continent_code}}</td>
                 <td class="text-xs-right">{{ props.item.valid_for_address }}</td>
@@ -97,6 +101,7 @@
                 <v-btn color="primary" @click="initialize">Reset</v-btn>
             </template>
         </v-data-table>
+        </v-flex>
     </div>
 </template>
 
@@ -113,21 +118,16 @@
       return {
         dialog: false,
         headers: [
-          {
-            text: 'Country Code',
-            align: 'center',
-            sortable: false,
-            value: 'country_code'
-          },
-          {text: 'Country', align: 'right', value: 'description'},
+          {text: 'Country Code', align: 'right', value: 'country_code'},
+          {text: 'Country', align: 'right', value: 'country'},
           {text: 'Continent Code', align: 'right', value: 'continent_code'},
-          {text: 'Valid for Address', align: 'right', value: 'long_description'},
+          {text: 'Valid for \n Address', align: 'right', value: 'valid_for_address'},
           {text: 'Valid for Home Country', align: 'right', value: 'valid_for_home_country'},
           {text: 'Valid for Birth Country', align: 'right', value: 'valid_for_birth_country'},
           {text: 'Valid for Citizenship', align: 'right', value: 'valid_for_citizenship'},
-          {text: 'iso3 Code', align: 'right', value: 'iso3_code'},
+          {text: 'iso3 Code', align: 'right', value: 'iso_code_3'},
           {text: 'iso Code', align: 'right', value: 'iso_code'},
-          {text: 'Phone Prefix', align: 'right', value: 'phone_prefix', sortable: false}
+          {text: 'Phone Prefix', align: 'right', value: 'phone_prefix'}
         ],
         countryCodes: [],
         editedIndex: -1,
