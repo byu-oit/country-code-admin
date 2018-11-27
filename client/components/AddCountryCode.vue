@@ -59,22 +59,21 @@
         <v-data-table
                 :headers="headers"
                 :items="getCountryCodes"
-                hide-actions
                 class="elevation-1"
                 must-sort
+                :pagination.sync="pagination"
         >
-
             <template slot="items" slot-scope="props">
-                <td class="text-xs-right">{{ props.item.country_code }}</td>
-                <td class="text-xs-right">{{ props.item.country }}</td>
-                <td class="text-xs-right">{{ props.item.continent_code}}</td>
-                <td class="text-xs-right">{{ props.item.valid_for_address }}</td>
-                <td class="text-xs-right">{{ props.item.valid_for_home_country}}</td>
-                <td class="text-xs-right">{{ props.item.valid_for_birth_country}}</td>
-                <td class="text-xs-right">{{ props.item.valid_for_citizenship}}</td>
-                <td class="text-xs-right">{{ props.item.iso_code_3 }}</td>
-                <td class="text-xs-right">{{ props.item.iso_code }}</td>
-                <td class="text-xs-right">{{ props.item.country_phone_prefix}}</td>
+                <td class="text-xs-center">{{ props.item.country_code }}</td>
+                <td class="text-xs-center">{{ props.item.country }}</td>
+                <td class="text-xs-center">{{ props.item.continent_code}}</td>
+                <td class="text-xs-center">{{ props.item.valid_for_address }}</td>
+                <td class="text-xs-center">{{ props.item.valid_for_home_country}}</td>
+                <td class="text-xs-center">{{ props.item.valid_for_birth_country}}</td>
+                <td class="text-xs-center">{{ props.item.valid_for_citizenship}}</td>
+                <td class="text-xs-center">{{ props.item.iso_code_3 }}</td>
+                <td class="text-xs-center">{{ props.item.iso_code }}</td>
+                <td class="text-xs-center">{{ props.item.country_phone_prefix}}</td>
                 <td class="justify-center layout px-0">
                     <v-icon
                             small
@@ -101,18 +100,21 @@
     name: 'AddCountryCode',
     data: function () {
       return {
+        pagination: {
+          rowsPerPage: 15
+        },
         dialog: false,
         headers: [
-          {text: 'Country Code', align: 'right', value: 'country_code'},
-          {text: 'Country', align: 'right', value: 'country'},
-          {text: 'Continent Code', align: 'right', value: 'continent_code'},
-          {text: 'Valid for Address', align: 'right', value: 'valid_for_address'},
-          {text: 'Valid for Home Country', align: 'right', value: 'valid_for_home_country'},
-          {text: 'Valid for Birth Country', align: 'right', value: 'valid_for_birth_country'},
-          {text: 'Valid for Citizenship', align: 'right', value: 'valid_for_citizenship'},
-          {text: 'iso3 Code', align: 'right', value: 'iso_code_3'},
-          {text: 'iso Code', align: 'right', value: 'iso_code'},
-          {text: 'Phone Prefix', align: 'right', value: 'phone_prefix'}
+          {text: 'Country Code', value: 'country_code'},
+          {text: 'Country', value: 'country'},
+          {text: 'Continent Code', value: 'continent_code'},
+          {text: 'Valid for Address', value: 'valid_for_address'},
+          {text: 'Valid for Home Country', value: 'valid_for_home_country'},
+          {text: 'Valid for Birth Country', value: 'valid_for_birth_country'},
+          {text: 'Valid for Citizenship', value: 'valid_for_citizenship'},
+          {text: 'iso3 Code', value: 'iso_code_3'},
+          {text: 'iso Code', value: 'iso_code'},
+          {text: 'Phone Prefix', value: 'phone_prefix'},
         ],
         countryCodes: [],
         editedIndex: -1,
@@ -173,7 +175,7 @@
         if (this.editedIndex > -1) {
           Object.assign(this.countryCodes[this.editedIndex], this.editedItem)
         } else {
-          this.countryCodes.push(this.editedItem)
+          this.countryCodes.push(this.editedItem) //API CALL
         }
         this.close()
       }
