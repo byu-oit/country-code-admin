@@ -1,6 +1,5 @@
 <template>
     <section>
-        <div>
         <v-toolbar flat color="white">
             <v-toolbar-title> {{ getName }} </v-toolbar-title>
             <v-spacer></v-spacer>
@@ -72,20 +71,22 @@
                 </v-tooltip>
             </template>
             <template slot="items" slot-scope="props">
-                <td class="justify-center layout px-0">
-                    <v-icon
+                <td>
+                    <v-layout>
+                        <v-icon
                             small
                             class="mr-2"
                             @click="editItem(props.item)"
-                    >
-                        edit
-                    </v-icon>
-                    <v-icon
+                        >
+                            edit
+                        </v-icon>
+                        <v-icon
                             small
                             @click="deleteItem(props.item)"
-                    >
-                        delete
-                    </v-icon>
+                        >
+                            delete
+                        </v-icon>
+                    </v-layout>
                 </td>
                 <td>{{ props.item.country_code }}</td>
                 <td class="text-xs-center">{{ props.item.country }}</td>
@@ -100,19 +101,7 @@
 
             </template>
         </v-data-table>
-    </div>
-        <!--<template>-->
-            <!--<div class="text-xs-center">-->
-            <!--<v-pagination-->
-                    <!--v-model="page"-->
-                    <!--:length="10"-->
-                    <!--prev-icon="mdi-menu-left"-->
-                    <!--next-icon="mdi-menu-right"-->
-            <!--&gt;</v-pagination>-->
-            <!--</div>-->
-        <!--</template>-->
     </section>
-
 </template>
 
 <script>
@@ -207,18 +196,5 @@
 </script>
 
 <style scoped>
-    table.v-table tbody td:first-child,
-    table.v-table tbody td:not(:first-child),
-    table.v-table tbody th:first-child,
-    table.v-table tbody th:not(:first-child),
-    table.v-table thead td:first-child,
-    table.v-table thead td:not(:first-child),
-    table.v-table thead th:first-child,
-    table.v-table thead th:not(:first-child) {
-        padding: 0 5px
-    }
-
-
-
 </style>
 
