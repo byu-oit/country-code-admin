@@ -1,13 +1,23 @@
 <template>
     <section>
-        <v-toolbar flat color="white">
-            <v-toolbar-title> {{ getName }} </v-toolbar-title>
+        <v-card>
+            <v-card-title class="cardTitle">
+                {{ getName }}
+                <v-spacer></v-spacer>
+                <v-text-field
+                        v-model="search"
+                        append-icon="search"
+                        label="Search"
+                        single-line
+                        hide-details
+                ></v-text-field>
             <v-spacer></v-spacer>
             <v-dialog v-model="dialog" max-width="500px">
                 <v-btn slot="activator" color="primary" dark class="mb-2">New Country Code</v-btn>
                 <v-card>
                     <v-card-title>
                         <span class="headline">{{ formTitle }}</span>
+
                     </v-card-title>
 
                     <v-card-text>
@@ -52,9 +62,11 @@
                         <v-btn color="blue darken-1" flat @click.native="close">Cancel</v-btn>
                         <v-btn color="blue darken-1" flat @click.native="save">Save</v-btn>
                     </v-card-actions>
+
                 </v-card>
             </v-dialog>
-        </v-toolbar>
+            </v-card-title>
+        </v-card>
 
         <v-data-table
                 :headers="headers"
@@ -63,6 +75,7 @@
                 must-sort
                 :pagination.sync="pagination"
                 :rows-per-page-items="rowSelection"
+                :search="search"
         >
             <template slot="headerCell" slot-scope="props">
                 <v-tooltip bottom>
@@ -114,6 +127,7 @@
           rowsPerPage: 15
         },
         rowSelection: [ 5, 15, 25, { "text": "$vuetify.dataIterator.rowsPerPageAll", "value": -1 } ],
+        search: '',
         dialog: false,
         headers: [
           {text: '', align: 'center', value: '', sortable: false},
@@ -196,5 +210,8 @@
 </script>
 
 <style scoped>
+    cardTitle {
+
+    }
 </style>
 
