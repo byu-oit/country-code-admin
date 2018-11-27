@@ -1,11 +1,12 @@
 <template>
-    <div>
+    <section>
+        <div>
         <v-toolbar flat color="white">
             <v-toolbar-title> {{ getName }} </v-toolbar-title>
             <!--<v-divider-->
-                    <!--class="mx-2"-->
-                    <!--inset-->
-                    <!--vertical-->
+            <!--class="mx-2"-->
+            <!--inset-->
+            <!--vertical-->
             <!--&gt;</v-divider>-->
             <v-spacer></v-spacer>
             <v-dialog v-model="dialog" max-width="500px">
@@ -67,16 +68,6 @@
                 class="elevation-1"
         >
             <template slot="items" slot-scope="props">
-                <td>{{ props.item.country_code }}</td>
-                <td class="text-xs-right">{{ props.item.country }}</td>
-                <td class="text-xs-right">{{ props.item.continent_code}}</td>
-                <td class="text-xs-right">{{ props.item.valid_for_address }}</td>
-                <td class="text-xs-right">{{ props.item.valid_for_home_country}}</td>
-                <td class="text-xs-right">{{ props.item.valid_for_birth_country}}</td>
-                <td class="text-xs-right">{{ props.item.valid_for_citizenship}}</td>
-                <td class="text-xs-right">{{ props.item.iso_code_3 }}</td>
-                <td class="text-xs-right">{{ props.item.iso_code }}</td>
-                <td class="text-xs-right">{{ props.item.country_phone_prefix}}</td>
                 <td class="justify-center layout px-0">
                     <v-icon
                             small
@@ -92,12 +83,35 @@
                         delete
                     </v-icon>
                 </td>
+                <td>{{ props.item.country_code }}</td>
+                <td class="text-xs-right">{{ props.item.country }}</td>
+                <td class="text-xs-right">{{ props.item.continent_code}}</td>
+                <td class="text-xs-right">{{ props.item.valid_for_address }}</td>
+                <td class="text-xs-right">{{ props.item.valid_for_home_country}}</td>
+                <td class="text-xs-right">{{ props.item.valid_for_birth_country}}</td>
+                <td class="text-xs-right">{{ props.item.valid_for_citizenship}}</td>
+                <td class="text-xs-right">{{ props.item.iso_code_3 }}</td>
+                <td class="text-xs-right">{{ props.item.iso_code }}</td>
+                <td class="text-xs-right">{{ props.item.country_phone_prefix}}</td>
+
             </template>
             <template slot="no-data">
                 <v-btn color="primary" @click="initialize">Reset</v-btn>
             </template>
         </v-data-table>
     </div>
+        <template>
+            <div class="text-xs-center">
+            <v-pagination
+                    v-model="page"
+                    :length="10"
+                    prev-icon="mdi-menu-left"
+                    next-icon="mdi-menu-right"
+            ></v-pagination>
+            </div>
+        </template>
+    </section>
+
 </template>
 
 <script>
@@ -111,14 +125,11 @@
     // components: {VTextField},
     data: function () {
       return {
+        page: 20,
         dialog: false,
         headers: [
-          {
-            text: 'Country Code',
-            align: 'center',
-            sortable: false,
-            value: 'country_code'
-          },
+          {text: '', align: 'center', value: ''},
+          {text: 'Country Code', align: 'center', sortable: false, value: 'country_code'},
           {text: 'Country', align: 'right', value: 'description'},
           {text: 'Continent Code', align: 'right', value: 'continent_code'},
           {text: 'Valid for Address', align: 'right', value: 'long_description'},
