@@ -62,6 +62,7 @@
                 class="elevation-1"
                 must-sort
                 :pagination.sync="pagination"
+                :rows-per-page-items="rowSelection"
         >
             <template slot="items" slot-scope="props">
                 <td class="text-xs-center">{{ props.item.country_code }}</td>
@@ -103,6 +104,7 @@
         pagination: {
           rowsPerPage: 15
         },
+        rowSelection: [ 5, 15, 25, { "text": "$vuetify.dataIterator.rowsPerPageAll", "value": -1 } ],
         dialog: false,
         headers: [
           {text: 'Country Code', value: 'country_code'},
