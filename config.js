@@ -56,7 +56,8 @@ const config = {
     wabs: {
         appName: pkg.name,
         //configFile: "C:\\Users\\challs\\Documents\\Secrets\\country-code-admin.json" // Carlie Config File
-        configFile: "C:/Users/tellers/Documents/node/countryconfig.json" // Chantel Config File
+        //configFile: "C:/Users/tellers/Documents/node/countryconfig.json" // Chantel Config File
+
     }
 };
 

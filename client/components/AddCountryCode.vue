@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <section>
+        <div>
         <v-toolbar flat color="white">
             <v-toolbar-title> {{ getName }} </v-toolbar-title>
             <v-spacer></v-spacer>
@@ -64,17 +65,13 @@
                 :pagination.sync="pagination"
                 :rows-per-page-items="rowSelection"
         >
+            <template slot="headerCell" slot-scope="props">
+                <v-tooltip bottom>
+          <span slot="activator">{{ props.header.text }}</span>
+                    <span>{{ props.header.text }}</span>
+                </v-tooltip>
+            </template>
             <template slot="items" slot-scope="props">
-                <td class="text-xs-center">{{ props.item.country_code }}</td>
-                <td class="text-xs-center">{{ props.item.country }}</td>
-                <td class="text-xs-center">{{ props.item.continent_code}}</td>
-                <td class="text-xs-center">{{ props.item.valid_for_address }}</td>
-                <td class="text-xs-center">{{ props.item.valid_for_home_country}}</td>
-                <td class="text-xs-center">{{ props.item.valid_for_birth_country}}</td>
-                <td class="text-xs-center">{{ props.item.valid_for_citizenship}}</td>
-                <td class="text-xs-center">{{ props.item.iso_code_3 }}</td>
-                <td class="text-xs-center">{{ props.item.iso_code }}</td>
-                <td class="text-xs-center">{{ props.item.country_phone_prefix}}</td>
                 <td class="justify-center layout px-0">
                     <v-icon
                             small
@@ -90,9 +87,32 @@
                         delete
                     </v-icon>
                 </td>
+                <td>{{ props.item.country_code }}</td>
+                <td class="text-xs-center">{{ props.item.country }}</td>
+                <td class="text-xs-center">{{ props.item.continent_code}}</td>
+                <td class="text-xs-center">{{ props.item.valid_for_address }}</td>
+                <td class="text-xs-center">{{ props.item.valid_for_home_country}}</td>
+                <td class="text-xs-center">{{ props.item.valid_for_birth_country}}</td>
+                <td class="text-xs-center">{{ props.item.valid_for_citizenship}}</td>
+                <td class="text-xs-center">{{ props.item.iso_code_3 }}</td>
+                <td class="text-xs-center">{{ props.item.iso_code }}</td>
+                <td class="text-xs-center">{{ props.item.country_phone_prefix}}</td>
+
             </template>
         </v-data-table>
     </div>
+        <!--<template>-->
+            <!--<div class="text-xs-center">-->
+            <!--<v-pagination-->
+                    <!--v-model="page"-->
+                    <!--:length="10"-->
+                    <!--prev-icon="mdi-menu-left"-->
+                    <!--next-icon="mdi-menu-right"-->
+            <!--&gt;</v-pagination>-->
+            <!--</div>-->
+        <!--</template>-->
+    </section>
+
 </template>
 
 <script>
@@ -107,8 +127,9 @@
         rowSelection: [ 5, 15, 25, { "text": "$vuetify.dataIterator.rowsPerPageAll", "value": -1 } ],
         dialog: false,
         headers: [
-          {text: 'Country Code', value: 'country_code'},
-          {text: 'Country', value: 'country'},
+          {text: '', align: 'center', value: '', sortable: false},
+          {text: 'Country Code',  value: 'country_code'},
+          {text: 'Country', align: 'center', value: 'country'},
           {text: 'Continent Code', value: 'continent_code'},
           {text: 'Valid for Address', value: 'valid_for_address'},
           {text: 'Valid for Home Country', value: 'valid_for_home_country'},
@@ -186,5 +207,18 @@
 </script>
 
 <style scoped>
+    table.v-table tbody td:first-child,
+    table.v-table tbody td:not(:first-child),
+    table.v-table tbody th:first-child,
+    table.v-table tbody th:not(:first-child),
+    table.v-table thead td:first-child,
+    table.v-table thead td:not(:first-child),
+    table.v-table thead th:first-child,
+    table.v-table thead th:not(:first-child) {
+        padding: 0 5px
+    }
+
+
+
 </style>
 
