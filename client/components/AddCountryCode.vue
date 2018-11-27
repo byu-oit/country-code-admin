@@ -8,6 +8,7 @@
             <!--inset-->
             <!--vertical-->
             <!--&gt;</v-divider>-->
+
             <v-spacer></v-spacer>
             <v-dialog v-model="dialog" max-width="500px">
                 <v-btn slot="activator" color="primary" dark class="mb-2">New Country Code</v-btn>
@@ -61,11 +62,13 @@
                 </v-card>
             </v-dialog>
         </v-toolbar>
+
         <v-data-table
                 :headers="headers"
                 :items="getCountryCodes"
-                hide-actions
                 class="elevation-1"
+                must-sort
+                :pagination.sync="pagination"
         >
             <template slot="headerCell" slot-scope="props">
                 <v-tooltip bottom>
@@ -74,6 +77,18 @@
                 </v-tooltip>
             </template>
             <template slot="items" slot-scope="props">
+
+                <!--<td class="text-xs-center">{{ props.item.country_code }}</td>-->
+                <!--<td class="text-xs-center">{{ props.item.country }}</td>-->
+                <!--<td class="text-xs-center">{{ props.item.continent_code}}</td>-->
+                <!--<td class="text-xs-center">{{ props.item.valid_for_address }}</td>-->
+                <!--<td class="text-xs-center">{{ props.item.valid_for_home_country}}</td>-->
+                <!--<td class="text-xs-center">{{ props.item.valid_for_birth_country}}</td>-->
+                <!--<td class="text-xs-center">{{ props.item.valid_for_citizenship}}</td>-->
+                <!--<td class="text-xs-center">{{ props.item.iso_code_3 }}</td>-->
+                <!--<td class="text-xs-center">{{ props.item.iso_code }}</td>-->
+                <!--<td class="text-xs-center">{{ props.item.country_phone_prefix}}</td>-->
+
                 <td class="justify-center layout px-0">
                     <v-icon
                             small
@@ -101,50 +116,60 @@
                 <td class="text-xs-center">{{ props.item.country_phone_prefix}}</td>
 
             </template>
-            <template slot="no-data">
-                <v-btn color="primary" @click="initialize">Reset</v-btn>
-            </template>
         </v-data-table>
     </div>
-        <template>
-            <div class="text-xs-center">
-            <v-pagination
-                    v-model="page"
-                    :length="10"
-                    prev-icon="mdi-menu-left"
-                    next-icon="mdi-menu-right"
-            ></v-pagination>
-            </div>
-        </template>
+        <!--<template>-->
+            <!--<div class="text-xs-center">-->
+            <!--<v-pagination-->
+                    <!--v-model="page"-->
+                    <!--:length="10"-->
+                    <!--prev-icon="mdi-menu-left"-->
+                    <!--next-icon="mdi-menu-right"-->
+            <!--&gt;</v-pagination>-->
+            <!--</div>-->
+        <!--</template>-->
     </section>
 
 </template>
 
 <script>
-  // import VTextField from 'vuetify/src/components/VTextField/VTextField'
-
   import {mapGetters} from 'vuex'
-  // import VTextField from 'vuetify/lib/components/VTextField/VTextField'
   export default {
     name: 'AddCountryCode',
-    // components: {VTextField},
-    // components: {VTextField},
     data: function () {
       return {
-        page: 1,
+        //
+        // page: 1,
+        // dialog: false,
+        // headers: [
+        //   {text: '', align: 'center', value: '', sortable: false},
+        //   {text: 'Country Code', align: 'center', value: 'country_code', width: '1%'},
+        //   {text: 'Country', align: 'center', value: 'description', width: '1%'},
+        //   {text: 'Continent Code', align: 'center', value: 'continent_code', width: '1%'},
+        //   {text: 'Valid for Address', align: 'center', value: 'long_description', width: '1%'},
+        //   {text: 'Valid for Home Country', align: 'center', value: 'valid_for_home_country', width: '1%'},
+        //   {text: 'Valid for Birth Country', align: 'center', value: 'valid_for_birth_country', width: '1%'},
+        //   {text: 'Valid for Citizenship', align: 'center', value: 'valid_for_citizenship', width: '1%'},
+        //   {text: 'iso3 Code', align: 'center', value: 'iso3_code', width: '1%'},
+        //   {text: 'iso Code', align: 'center', value: 'iso_code', width: '1%'},
+        //   {text: 'Phone Prefix', align: 'center', value: 'phone_prefix', width: '1%'},
+
+        pagination: {
+          rowsPerPage: 15
+        },
         dialog: false,
         headers: [
           {text: '', align: 'center', value: '', sortable: false},
-          {text: 'Country Code', align: 'center', value: 'country_code', width: '1%'},
-          {text: 'Country', align: 'center', value: 'description', width: '1%'},
-          {text: 'Continent Code', align: 'center', value: 'continent_code', width: '1%'},
-          {text: 'Valid for Address', align: 'center', value: 'long_description', width: '1%'},
-          {text: 'Valid for Home Country', align: 'center', value: 'valid_for_home_country', width: '1%'},
-          {text: 'Valid for Birth Country', align: 'center', value: 'valid_for_birth_country', width: '1%'},
-          {text: 'Valid for Citizenship', align: 'center', value: 'valid_for_citizenship', width: '1%'},
-          {text: 'iso3 Code', align: 'center', value: 'iso3_code', width: '1%'},
-          {text: 'iso Code', align: 'center', value: 'iso_code', width: '1%'},
-          {text: 'Phone Prefix', align: 'center', value: 'phone_prefix', width: '1%'}
+          {text: 'Country Code',  value: 'country_code'},
+          {text: 'Country', align: 'center', value: 'country'},
+          {text: 'Continent Code', value: 'continent_code'},
+          {text: 'Valid for Address', value: 'valid_for_address'},
+          {text: 'Valid for Home Country', value: 'valid_for_home_country'},
+          {text: 'Valid for Birth Country', value: 'valid_for_birth_country'},
+          {text: 'Valid for Citizenship', value: 'valid_for_citizenship'},
+          {text: 'iso3 Code', value: 'iso_code_3'},
+          {text: 'iso Code', value: 'iso_code'},
+          {text: 'Phone Prefix', value: 'phone_prefix'},
         ],
         countryCodes: [],
         editedIndex: -1,
@@ -184,9 +209,7 @@
         val || this.close()
       }
     },
-
     methods: {
-
       editItem (item) {
         this.editedIndex = this.countryCodes.indexOf(item)
         this.editedItem = Object.assign({}, item)
@@ -207,7 +230,7 @@
         if (this.editedIndex > -1) {
           Object.assign(this.countryCodes[this.editedIndex], this.editedItem)
         } else {
-          this.countryCodes.push(this.editedItem)
+          this.countryCodes.push(this.editedItem) //API CALL
         }
         this.close()
       }
