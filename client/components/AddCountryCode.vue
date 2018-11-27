@@ -2,11 +2,6 @@
     <div>
         <v-toolbar flat color="white">
             <v-toolbar-title> {{ getName }} </v-toolbar-title>
-            <!--<v-divider-->
-                    <!--class="mx-2"-->
-                    <!--inset-->
-                    <!--vertical-->
-            <!--&gt;</v-divider>-->
             <v-spacer></v-spacer>
             <v-dialog v-model="dialog" max-width="500px">
                 <v-btn slot="activator" color="primary" dark class="mb-2">New Country Code</v-btn>
@@ -61,7 +56,6 @@
             </v-dialog>
         </v-toolbar>
 
-        <v-flex md30 style="overflow: auto">
         <v-data-table
                 :headers="headers"
                 :items="getCountryCodes"
@@ -97,23 +91,14 @@
                     </v-icon>
                 </td>
             </template>
-            <template slot="no-data">
-                <v-btn color="primary" @click="initialize">Reset</v-btn>
-            </template>
         </v-data-table>
-        </v-flex>
     </div>
 </template>
 
 <script>
-  // import VTextField from 'vuetify/src/components/VTextField/VTextField'
-
   import {mapGetters} from 'vuex'
-  // import VTextField from 'vuetify/lib/components/VTextField/VTextField'
   export default {
     name: 'AddCountryCode',
-    // components: {VTextField},
-    // components: {VTextField},
     data: function () {
       return {
         dialog: false,
@@ -121,7 +106,7 @@
           {text: 'Country Code', align: 'right', value: 'country_code'},
           {text: 'Country', align: 'right', value: 'country'},
           {text: 'Continent Code', align: 'right', value: 'continent_code'},
-          {text: 'Valid for \n Address', align: 'right', value: 'valid_for_address'},
+          {text: 'Valid for Address', align: 'right', value: 'valid_for_address'},
           {text: 'Valid for Home Country', align: 'right', value: 'valid_for_home_country'},
           {text: 'Valid for Birth Country', align: 'right', value: 'valid_for_birth_country'},
           {text: 'Valid for Citizenship', align: 'right', value: 'valid_for_citizenship'},
@@ -167,9 +152,7 @@
         val || this.close()
       }
     },
-
     methods: {
-
       editItem (item) {
         this.editedIndex = this.countryCodes.indexOf(item)
         this.editedItem = Object.assign({}, item)
