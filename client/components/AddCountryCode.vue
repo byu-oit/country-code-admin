@@ -67,6 +67,12 @@
                 hide-actions
                 class="elevation-1"
         >
+            <template slot="headerCell" slot-scope="props">
+                <v-tooltip bottom>
+          <span slot="activator">{{ props.header.text }}</span>
+                    <span>{{ props.header.text }}</span>
+                </v-tooltip>
+            </template>
             <template slot="items" slot-scope="props">
                 <td class="justify-center layout px-0">
                     <v-icon
@@ -84,15 +90,15 @@
                     </v-icon>
                 </td>
                 <td>{{ props.item.country_code }}</td>
-                <td class="text-xs-right">{{ props.item.country }}</td>
-                <td class="text-xs-right">{{ props.item.continent_code}}</td>
-                <td class="text-xs-right">{{ props.item.valid_for_address }}</td>
-                <td class="text-xs-right">{{ props.item.valid_for_home_country}}</td>
-                <td class="text-xs-right">{{ props.item.valid_for_birth_country}}</td>
-                <td class="text-xs-right">{{ props.item.valid_for_citizenship}}</td>
-                <td class="text-xs-right">{{ props.item.iso_code_3 }}</td>
-                <td class="text-xs-right">{{ props.item.iso_code }}</td>
-                <td class="text-xs-right">{{ props.item.country_phone_prefix}}</td>
+                <td class="text-xs-center">{{ props.item.country }}</td>
+                <td class="text-xs-center">{{ props.item.continent_code}}</td>
+                <td class="text-xs-center">{{ props.item.valid_for_address }}</td>
+                <td class="text-xs-center">{{ props.item.valid_for_home_country}}</td>
+                <td class="text-xs-center">{{ props.item.valid_for_birth_country}}</td>
+                <td class="text-xs-center">{{ props.item.valid_for_citizenship}}</td>
+                <td class="text-xs-center">{{ props.item.iso_code_3 }}</td>
+                <td class="text-xs-center">{{ props.item.iso_code }}</td>
+                <td class="text-xs-center">{{ props.item.country_phone_prefix}}</td>
 
             </template>
             <template slot="no-data">
@@ -125,20 +131,20 @@
     // components: {VTextField},
     data: function () {
       return {
-        page: 20,
+        page: 1,
         dialog: false,
         headers: [
-          {text: '', align: 'center', value: ''},
-          {text: 'Country Code', align: 'center', sortable: false, value: 'country_code'},
-          {text: 'Country', align: 'right', value: 'description'},
-          {text: 'Continent Code', align: 'right', value: 'continent_code'},
-          {text: 'Valid for Address', align: 'right', value: 'long_description'},
-          {text: 'Valid for Home Country', align: 'right', value: 'valid_for_home_country'},
-          {text: 'Valid for Birth Country', align: 'right', value: 'valid_for_birth_country'},
-          {text: 'Valid for Citizenship', align: 'right', value: 'valid_for_citizenship'},
-          {text: 'iso3 Code', align: 'right', value: 'iso3_code'},
-          {text: 'iso Code', align: 'right', value: 'iso_code'},
-          {text: 'Phone Prefix', align: 'right', value: 'phone_prefix', sortable: false}
+          {text: '', align: 'center', value: '', sortable: false},
+          {text: 'Country Code', align: 'center', value: 'country_code', width: '1%'},
+          {text: 'Country', align: 'center', value: 'description', width: '1%'},
+          {text: 'Continent Code', align: 'center', value: 'continent_code', width: '1%'},
+          {text: 'Valid for Address', align: 'center', value: 'long_description', width: '1%'},
+          {text: 'Valid for Home Country', align: 'center', value: 'valid_for_home_country', width: '1%'},
+          {text: 'Valid for Birth Country', align: 'center', value: 'valid_for_birth_country', width: '1%'},
+          {text: 'Valid for Citizenship', align: 'center', value: 'valid_for_citizenship', width: '1%'},
+          {text: 'iso3 Code', align: 'center', value: 'iso3_code', width: '1%'},
+          {text: 'iso Code', align: 'center', value: 'iso_code', width: '1%'},
+          {text: 'Phone Prefix', align: 'center', value: 'phone_prefix', width: '1%'}
         ],
         countryCodes: [],
         editedIndex: -1,
@@ -210,5 +216,18 @@
 </script>
 
 <style scoped>
+    table.v-table tbody td:first-child,
+    table.v-table tbody td:not(:first-child),
+    table.v-table tbody th:first-child,
+    table.v-table tbody th:not(:first-child),
+    table.v-table thead td:first-child,
+    table.v-table thead td:not(:first-child),
+    table.v-table thead th:first-child,
+    table.v-table thead th:not(:first-child) {
+        padding: 0 5px
+    }
+
+
+
 </style>
 
