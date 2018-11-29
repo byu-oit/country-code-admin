@@ -4,25 +4,20 @@
             <h2> Error retrieving codes.  Please make sure you are logged in. </h2>
         </div>
         <div  v-show="getAuthorized">
-        <!--<CountryCodeTitle></CountryCodeTitle>-->
-        <!--<CountryCodeTable></CountryCodeTable>-->
         <!--<button @click="fetchCountryCodes">API Call</button>-->
-        <AddCountryCode></AddCountryCode>
+        <CountryCodeTable></CountryCodeTable>
         </div>
     </div>
 
 </template>
 
 <script>
-    import CountryCodeTitle from "../components/name"
-    import CountryCodeTable from "../components/table"
-    import AddCountryCode from '../components/AddCountryCode'
+
+    import CountryCodeTable from '../components/country-code-table'
     import { mapActions, mapGetters } from 'vuex'
 
     export default {
         components: {
-            CountryCodeTitle,
-            AddCountryCode,
             CountryCodeTable
         },
         computed: {
