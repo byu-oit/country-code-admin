@@ -19,18 +19,7 @@
 // export state as a function
 export const state = () => ({
     name: 'Country Codes',
-    countryCodes: [{
-        country_code: '',
-        country: '',
-        continent_code: '',
-        valid_for_address: '',
-        valid_for_home_country: '',
-        valid_for_birth_country: '',
-        valid_for_citizenship: '',
-        iso_code_3: '',
-        iso_code: '',
-        country_phone_prefix: '',
-    }],
+    countryCodes: [],
     authorized: null
 });
 
@@ -52,6 +41,15 @@ export const mutations = {
     },
     setAuthorized: (state, bool) => {
         state.authorized = bool
+    },
+    deleteCode: (state, index) => {
+        state.countryCodes.splice(index, 1) //API CALL
+    },
+    editCode: (state, item, index) => {
+        state.countryCodes[index] = item //API CALL
+    },
+    addCode: (state, item) => {
+        state.countryCodes.push(item) //API CALL
     }
 };
 
