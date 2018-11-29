@@ -31,7 +31,7 @@ export const state = () => ({
         iso_code: '',
         country_phone_prefix: '',
     }],
-    authorized: false
+    authorized: null
 });
 
 export const getters = {
@@ -59,25 +59,30 @@ export const mutations = {
 export const actions = {
 
     fetchCountryCodes: async (context) =>{
-        const request = {
-            url: "https://api.byu.edu:443/domains/identity/country_codes_v2/v2/"
+        if (!(window.byu && window.byu.user && window.byu.user.byuId)) {
+            context.commit("setAuthorized", false)
         }
-        return new Promise ((resolve, reject) => {
-            window.byu.auth.request(request, (body, status) => {
-                if (status >= 400) {
-                    console.error(`${status} - ${body}`)
-                    context.commit("setAuthorized", false)
-                    resolve(false)
-                }
-                else {
-                    const values = JSON.parse(body).values
-                    context.commit('setCountryCodes', values)
-                    context.commit('setAuthorized', true)
-                    console.log(values)
-                    resolve(true)
-                }
+        else {
+            const request = {
+                url: "https://api.byu.edu:443/domains/identity/country_codes_v2/v2/"
+            }
+            return new Promise((resolve, reject) => {
+                window.byu.auth.request(request, (body, status) => {
+                    if (status >= 400) {
+                        console.error(`${status} - ${body}`)
+                        context.commit("setAuthorized", false)
+                        resolve(false)
+                    }
+                    else {
+                        const values = JSON.parse(body).values
+                        context.commit('setCountryCodes', values)
+                        context.commit('setAuthorized', true)
+                        console.log(values)
+                        resolve(true)
+                    }
+                })
             })
-        })
+        }
     },
 
     // server side only execution for pre-populating the Vuex store

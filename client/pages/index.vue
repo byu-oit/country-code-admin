@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-if="getAuthorized === false">
-            <h2> Error retrieving codes.  Please make sure you are logged in. </h2>
+            <h2> Access not granted. </h2>
         </div>
         <div  v-show="getAuthorized">
         <!--<button @click="fetchCountryCodes">API Call</button>-->
@@ -37,8 +37,7 @@
 </script>
 
 <style>
-    section {
-        text-align: center;
-    :v-color="primary";
+    h2 {
+        color: #002856;
     }
 </style>
